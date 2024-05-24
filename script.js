@@ -1,13 +1,10 @@
 function addButton() {
-    // Obtém todos os elementos com a classe "add-button"
-    let buttons = document.querySelectorAll(".add-button");
-    
-    // Para cada botão encontrado
-    buttons.forEach(button => {
-        // Adiciona um ouvinte de evento de clique
-        button.addEventListener("click", function() {
+    let container = document.querySelector('.container');
+    container.addEventListener('click', function(event) {
+        // Verifica se o elemento clicado é um botão 'add-button'
+        if (event.target.matches('.add-button')) {
             // Obtém o próximo elemento irmão com a classe "add-menu"
-            let menu = this.nextElementSibling;
+            let menu = event.target.nextElementSibling;
             
             // Alterna a exibição do menu
             if (menu.style.display === "block") {
@@ -15,7 +12,7 @@ function addButton() {
             } else {
                 menu.style.display = "block";
             }
-        });
+        }
     });
 }
 
@@ -117,6 +114,14 @@ function addScreen() {
     input.className = 'videoInput';
     input.onkeydown = function(event) { addVideo(event, 'videoInput', 'videoIframe'); };
 
+
+   // Cria o elemento button com a classe 'remove-button'
+  let removeButton = document.createElement('button');
+  removeButton.className = "remove-button";
+  removeButton.onclick = function() { removeScreen(this); }
+  removeButton.textContent = "x";
+
+
     // Adiciona os elementos criados ao span
     span.appendChild(input);
 
@@ -124,6 +129,7 @@ function addScreen() {
     tela.appendChild(iframe);
     tela.appendChild(button);
     tela.appendChild(span);
+    tela.appendChild(removeButton);
 
     // Adiciona a div 'tela' ao elemento 'container'
     container.appendChild(tela);
@@ -135,6 +141,15 @@ let createPlayerButton = document.querySelector('.createPlayer')
 // Adiciona o ouvinte de eventos
 createPlayerButton.addEventListener("click", addScreen);
 
+//Remove a tela
+
+removeScreen = (buttonElement) => {
+    // Obtém a tela associada ao botão de remover
+    let tela = buttonElement.parentNode;
+
+    // Remove a tela
+    tela.parentNode.removeChild(tela);
+}
 
 
 
