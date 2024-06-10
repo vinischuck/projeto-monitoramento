@@ -52,9 +52,11 @@ addVideoSpalla = (e,videoInput,videoIframe) => {
     
     if(e.keyCode === 13){
         var video_id = link.split('?live=')[1];
-        var iframe_url = "https://ead.ceisc.com.br/admin/video_interno/" + video_id;
+        var iframe_url = "https://ead.ceisc.com.br/admin/video_interno/aovivo/" + video_id;
         iframe.src = iframe_url;
     }
+    console.log("teste")
+    
     clearInput();
 }
 
